@@ -12,7 +12,7 @@ def writeNewSQL(sqlFile):
     for i in range(5):
         outSQLFile=os.path.abspath(os.path.join("./","zcta_"+yearList[i]+".SQL.txt"))
         outputFiles.append(outSQLFile)
-    for k in range(1,5):
+    for k in range(0,5):
         with open(outputFiles[k],'w') as outFH:
             with open(sqlFile,'r')as fh:
                 allLines=fh.readlines()
@@ -49,10 +49,11 @@ def main():
     yearList=['2012','2013','2014','2015','2016','2017']
     sqlFiles=[]
     outDir="output/"
-    for i in range(1,5):
-        outFile=os.path.join(os.path.abspath(outDir),yearList[i])  #folder for zcta_sm
+    for i in range(0,5):
+        if not os.path.exists(os.path.join(outDir,yearList[i])):
+            os.makedirs(os.path.join(outDir,yearList[i]))
         outSQLFile=os.path.abspath(os.path.join("./","zcta_"+yearList[i]+".SQL.txt"))
-        # outSQLFile="zcta_"+yearList[i]+".SQL.txt"
+        outSQLFile="zcta_"+yearList[i]+".SQL.txt"
         sqlFiles.append(outSQLFile)
     #print(sqlFiles)
     for sql in sqlFiles:
